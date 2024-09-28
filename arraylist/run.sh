@@ -2,5 +2,5 @@
 
 set -e
 
-gcc -Wall -I./src/include -I./src/ui -o ./build/file.exe ./src/*.c ./src/ui/*.c
+gcc -Wall -o ./build/file.exe ./src/*.c 
 ./build/file.exe
