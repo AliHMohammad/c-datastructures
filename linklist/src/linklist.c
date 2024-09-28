@@ -31,7 +31,6 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-
 LinkedList* linkedlist() {
     LinkedList* list = malloc(sizeof(LinkedList));
     list->head = NULL;
@@ -50,22 +49,20 @@ Node* node() {
 }
 
 void add_first(LinkedList* list, int value) {
-    LinkedList* templist = linkedlist();
-    templist->head = list->head;
-
     Node* newNode = node();
     newNode->data = value;
 
-    list->head = newNode;
-    newNode->nextNode = templist->head;
-    
-    Node* nodeP = list->head;
-    while(nodeP->nextNode) {
-        nodeP = nodeP->nextNode;
-    }
-    list->tail = nodeP;
+    Node* prevList = list->head; 
 
-    free(templist);
+    newNode->nextNode = prevList; 
+
+    if (prevList != NULL) {
+        prevList->prevNode = newNode;
+    } else {
+        list->tail = newNode;
+    }
+
+    list->head = newNode;
 }
 
 void add_last(LinkedList *list, int value) {
