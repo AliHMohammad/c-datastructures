@@ -27,6 +27,10 @@ int main(int argc, char const *argv[])
     print_list(list);
     add_last(list, 1345);
     print_list(list);
+    remove_first(list);
+    print_list(list);
+    remove_last(list);
+    print_list(list);
 
     return 0;
 }
@@ -76,6 +80,22 @@ void add_last(LinkedList *list, int value) {
     newNode->prevNode = tailNode;
 
     list->tail = newNode;
+}
+
+void remove_first(LinkedList* list) {
+    Node* tempList = list->head->nextNode;
+    tempList->prevNode = NULL;
+
+    free(list->head);
+    list->head = tempList;
+}
+
+void remove_last(LinkedList* list) {
+    Node *lastNode = list->tail;
+    lastNode->prevNode->nextNode = NULL;
+    list->tail = lastNode->prevNode;
+
+    free(lastNode);
 }
 
 void print_list(LinkedList* list) {
