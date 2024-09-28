@@ -25,6 +25,8 @@ int main(int argc, char const *argv[])
     add_first(list, 4);
     add_first(list, 567);
     print_list(list);
+    add_last(list, 1345);
+    print_list(list);
 
     return 0;
 }
@@ -56,10 +58,28 @@ void add_first(LinkedList* list, int value) {
 
     list->head = newNode;
     newNode->nextNode = templist->head;
+    
+    Node* nodeP = list->head;
+    while(nodeP->nextNode) {
+        nodeP = nodeP->nextNode;
+    }
+    list->tail = nodeP;
 
     free(templist);
 }
 
+void add_last(LinkedList *list, int value) {
+    Node* newNode = node();
+    newNode->data = value;
+    newNode->nextNode = NULL;
+
+    Node* tailNode = list->tail;
+
+    tailNode->nextNode = newNode;
+    newNode->prevNode = tailNode;
+
+    list->tail = newNode;
+}
 
 void print_list(LinkedList* list) {
     printf("=========================\n");
