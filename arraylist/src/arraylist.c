@@ -7,9 +7,14 @@
 int main(int argc, char const *argv[])
 {
     ArrayList* list = arraylist();
-    print_list(*list);
+    
     add(list, 4);
+    add(list, 55);
+    add(list, 24);
+    add(list, 65);
+    int item = get(list, 4);
     print_list(*list);
+    printf("value: %d\n", item);
     return 0;
 }
 
@@ -27,6 +32,16 @@ void add(ArrayList* list, int value) {
     *(list->data + list->size) = value;
     list->size += 1;
     //TODO: Check.
+}
+
+int get(ArrayList* list, int index) {
+    if ((list->size - 1) < index) {
+        puts("Index out of bounds.");
+        return -1;
+        //TODO: Throw exception
+    }
+
+    return *(list->data + index);
 }
 
 
