@@ -7,14 +7,15 @@
 int main(int argc, char const *argv[])
 {
     ArrayList* list = arraylist();
-    
-    add(list, 4);
-    add(list, 55);
-    add(list, 24);
-    add(list, 65);
-    int item = get(list, 4);
+
+    add(list, 77);
+    add(list, 12134);
+    add(list, 3424);
+    add(list, 62);
+
+    set(list, 2, 10);
     print_list(*list);
-    printf("value: %d\n", item);
+
     return 0;
 }
 
@@ -31,7 +32,7 @@ ArrayList* arraylist() {
 void add(ArrayList* list, int value) {
     *(list->data + list->size) = value;
     list->size += 1;
-    //TODO: Check.
+    //TODO: Check to expand capacity
 }
 
 int get(ArrayList* list, int index) {
@@ -44,10 +45,39 @@ int get(ArrayList* list, int index) {
     return *(list->data + index);
 }
 
+int size(ArrayList* list) {
+    return list->size;
+}
 
+void clear(ArrayList* list) {
+    free(list->data);
+    list->data = (int*) malloc(START_SIZE * sizeof(int));
+    list->size = 0;
+    list->capacity = START_SIZE;
+}
 
+void remove_last(ArrayList* list) {
+    if (list->size == 0) {
+        return;
+    }
 
+    int lastIndex = list->size - 1;
 
+    *(list->data + lastIndex) = '\0';
+    list->size -= 1;
+
+    //TODO: Check to minimize capacity
+}
+
+void set(ArrayList* list, int index, int value) {
+    if ((list->size - 1) < index) {
+        puts("Index out of bounds.");
+        return;
+        //TODO: Throw exception
+    }
+
+    *(list->data + index) = value;
+}
 
 
 void print_list(ArrayList list) {
