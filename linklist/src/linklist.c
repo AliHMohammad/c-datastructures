@@ -21,15 +21,11 @@ int main(int argc, char const *argv[])
 {
     LinkedList* list = linkedlist();
     add_first(list, 10);
-    print_list(list);
     add_first(list, 4);
     add_first(list, 567);
-    print_list(list);
     add_last(list, 1345);
     print_list(list);
-    remove_first(list);
-    print_list(list);
-    remove_last(list);
+    add_index(list, 10, 777);
     print_list(list);
 
     return 0;
@@ -82,6 +78,34 @@ void add_last(LinkedList *list, int value) {
     list->tail = newNode;
 }
 
+void add_index(LinkedList* list, unsigned int index, int value) {
+    Node* newNode = node();
+    newNode->data = value;
+
+    if (index == 0) {
+        add_first(list, value);
+        return;
+    }
+
+    Node* node = list->head;
+    for (int i = 0; i < index; i++)
+    {
+        node = node->nextNode;
+        if (node == NULL) {
+            add_last(list, value);
+            return;
+        }
+    }
+
+    Node* nodePrev = node->prevNode;
+
+    newNode->prevNode = node->prevNode;
+    nodePrev->nextNode = newNode;
+
+    newNode->nextNode = node;
+    node->prevNode = newNode;
+}
+
 void remove_first(LinkedList* list) {
     Node* tempList = list->head->nextNode;
     tempList->prevNode = NULL;
@@ -97,6 +121,8 @@ void remove_last(LinkedList* list) {
 
     free(lastNode);
 }
+
+
 
 void print_list(LinkedList* list) {
     printf("=========================\n");
