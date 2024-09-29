@@ -8,6 +8,8 @@ int main(int argc, char const *argv[])
     LinkedList* list = linkedlist();
     add_last(list, 10);
     print_list(list);
+    remove_last(list);
+    print_list(list);
     add_first(list, 4);
     add_first(list, 567);
     add_last(list, 1345);
@@ -132,6 +134,14 @@ void remove_index(LinkedList* list, int index) {
 }
 
 void remove_first(LinkedList* list) {
+    if (list->head == list->tail) {
+        Node* onlyNode = list->head;
+        list->head = NULL;
+        list->tail = NULL;
+        free(onlyNode);
+        return;
+    }
+
     Node* tempList = list->head->nextNode;
     tempList->prevNode = NULL;
 
@@ -140,6 +150,14 @@ void remove_first(LinkedList* list) {
 }
 
 void remove_last(LinkedList* list) {
+    if (list->head == list->tail) {
+        Node* onlyNode = list->head;
+        list->head = NULL;
+        list->tail = NULL;
+        free(onlyNode);
+        return;
+    }
+
     Node *lastNode = list->tail;
     lastNode->prevNode->nextNode = NULL;
     list->tail = lastNode->prevNode;

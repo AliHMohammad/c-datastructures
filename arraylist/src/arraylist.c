@@ -35,7 +35,7 @@ int main(int argc, char const *argv[])
 
 
 ArrayList* arraylist() {
-    ArrayList* myArr = (ArrayList*) malloc(sizeof(ArrayList));
+    ArrayList* myArr = malloc(sizeof(ArrayList));
     myArr->data = (int*) malloc(START_SIZE * sizeof(int));
     myArr->size = 0;
     myArr->capacity = START_SIZE;

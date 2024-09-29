@@ -31,16 +31,16 @@ Adds a new node with the given `value` to the beginning of the list. Updates the
 Adds a new node with the given `value` to the end of the list. Updates the `tail` pointer to point to the new node. If the list is empty, sets the `head` to the new node.
 
 ### `void add_index(LinkedList* list, unsigned int index, int value)`
-Inserts a new node with the given `value` at the specified `index`. Shifts the nodes to accommodate the new element. If the index is out of bounds, adds the node to the end of the list. Prints an error message if the index is invalid.
+Inserts a new node with the given `value` at the specified `index`. Shifts the nodes to accommodate the new element. If the index is out of bounds, adds the node to the end of the list.
 
 ### `void remove_index(LinkedList* list, int index)`
-Removes the node at the specified `index`. Adjusts pointers of the neighboring nodes to maintain the list structure. If the index is 0, removes the first node. If the index is out of bounds, removes the last node. Prints an error message if the index is invalid.
+Removes the node at the specified `index`. Adjusts pointers of the neighboring nodes to maintain the list structure. If the index is 0, removes the first node. If the index is out of bounds, removes the last node.
 
 ### `void remove_first(LinkedList* list)`
-Removes the first node from the list and updates the `head` pointer to point to the next node. If the list becomes empty, sets `tail` to `NULL`.
+Removes the first node from the list and updates the `head` pointer to point to the next node. If the list becomes empty, sets `tail` and `head` to `NULL`.
 
 ### `void remove_last(LinkedList* list)`
-Removes the last node from the list and updates the `tail` pointer to point to the previous node. If the list becomes empty, sets `head` to `NULL`.
+Removes the last node from the list and updates the `tail` pointer to point to the previous node. If the list becomes empty, sets `tail` and `head` to `NULL`.
 
 ### `void swap(LinkedList* list, unsigned int indexOne, unsigned int indexTwo)`
 Swaps the nodes at the specified `indexOne` and `indexTwo`. Adjusts pointers to maintain the correct order. If the indices are the same or out of bounds, the function returns without making changes.
