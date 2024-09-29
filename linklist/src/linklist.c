@@ -27,6 +27,8 @@ int main(int argc, char const *argv[])
     print_list(list);
     add_index(list, 10, 777);
     print_list(list);
+    remove_index(list, 2);
+    print_list(list);
 
     return 0;
 }
@@ -104,6 +106,31 @@ void add_index(LinkedList* list, unsigned int index, int value) {
 
     newNode->nextNode = node;
     node->prevNode = newNode;
+}
+
+void remove_index(LinkedList* list, int index) {
+    if (index == 0) {
+        remove_first(list);
+        return;
+    }
+
+    Node* nodeToRemove = list->head;
+    for (int i = 0; i < index; i++)
+    {
+        nodeToRemove = nodeToRemove->nextNode;
+        if (nodeToRemove == NULL) {
+            remove_last(list);
+            return;
+        }
+    }
+
+    Node *nodeBefore = nodeToRemove->prevNode;
+    Node *nodeAfter = nodeToRemove->nextNode;
+
+    nodeBefore->nextNode = nodeAfter;
+    nodeAfter->prevNode = nodeBefore;
+
+    free(nodeToRemove);
 }
 
 void remove_first(LinkedList* list) {
