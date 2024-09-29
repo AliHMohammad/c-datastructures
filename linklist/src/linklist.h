@@ -12,8 +12,6 @@ typedef struct LinkedList {
     struct Node* tail; // last node
 } LinkedList;
 
-
-// det skal være muligt både at tilføje, fjerne, indsætte og ombytte nodes i listen.
 LinkedList* linkedlist();
 Node *node();
 void add_first(LinkedList* list, int value);
@@ -21,17 +19,8 @@ void add_last(LinkedList* list, int value);
 void remove_first(LinkedList* list);
 void remove_last(LinkedList* list);
 void add_index(LinkedList* list, unsigned int index, int value);
-
 void remove_index(LinkedList* list, int index);
-void swap(LinkedList *list, int indexOne, int indexTwo);
-
+void swap(LinkedList *list, unsigned int indexOne, unsigned int indexTwo);
 void print_list(LinkedList* list);
-
-
-
-// int size(LinkedList* list);
-// int get(LinkedList* list, int index);
-// void clear(LinkedList* list);
-// void set(LinkedList* list, int index, int value);
 
 #endif // LINKLIST_H

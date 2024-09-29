@@ -3,20 +3,6 @@
 #include "linklist.h"
 
 
-
-// typedef struct Node {
-//     Node* nextNode;
-//     Node* prevNode;
-//     int data;
-// } Node;
-
-// typedef struct LinkedList {
-//     Node* head; // first node
-//     Node* tail; // last node
-// } LinkedList;
-
-
-
 int main(int argc, char const *argv[])
 {
     LinkedList* list = linkedlist();
@@ -25,9 +11,16 @@ int main(int argc, char const *argv[])
     add_first(list, 567);
     add_last(list, 1345);
     print_list(list);
-    add_index(list, 10, 777);
+    add_first(list, 754);
+    add_last(list, 1222);
+    add_first(list, 43);
+    add_last(list, 1334);
+    add_index(list, 2, 777);
     print_list(list);
-    remove_index(list, 2);
+    remove_index(list, 4);
+    remove_last(list);
+    print_list(list);
+    swap(list, 1, 3);
     print_list(list);
 
     return 0;
@@ -147,6 +140,68 @@ void remove_last(LinkedList* list) {
     list->tail = lastNode->prevNode;
 
     free(lastNode);
+}
+
+void swap(LinkedList *list, unsigned int indexOne, unsigned int indexTwo) {
+    Node* firstNode = list->head;
+    Node* secondNode = list->head;
+
+    for (int i = 0; i < indexOne; i++)
+    {
+        if (firstNode->nextNode == NULL) {
+            break;
+        }
+
+        firstNode = firstNode->nextNode;
+    }
+
+    for (int i = 0; i < indexTwo; i++)
+    {
+        if (secondNode->nextNode == NULL) {
+            break;
+        }
+
+        secondNode = secondNode->nextNode;
+    }
+
+    // If indexOne and IndexTwo equal or both indexes are out of bounds, return
+    if (firstNode == secondNode) {
+        return;
+    }
+
+    Node* tempNode = node();
+    tempNode->data = NULL;
+    Node* prevNode;
+    Node* nextNode;
+
+    // Save firstNode information in tempNode
+    tempNode->nextNode = firstNode->nextNode;
+    tempNode->prevNode = firstNode->prevNode;
+
+    // Save the previous node and the next node to the node to be replaced
+    prevNode = secondNode->prevNode;
+    nextNode = secondNode->nextNode;
+
+    // Overwrite firstNode fields except data, with secondNode fields;
+    // PrevNode and NextNode is set to firstNode
+    firstNode->prevNode = secondNode->prevNode;
+    prevNode->nextNode = firstNode;
+    firstNode->nextNode = secondNode->nextNode;
+    nextNode->prevNode = firstNode;
+
+    // Save the previous node and the next node to the node to be replaced
+    prevNode = tempNode->prevNode;
+    nextNode = tempNode->nextNode;
+
+    // Overwrite secondNode fields except data with tempNode (firstNode) fields
+    // PrevNode and NextNode is set to secondNode
+    secondNode->prevNode = tempNode->prevNode;
+    prevNode->nextNode = secondNode;
+    secondNode->nextNode = tempNode->nextNode;
+    nextNode->prevNode = secondNode;
+
+    // Free tempNode
+    free(tempNode);
 }
 
 
