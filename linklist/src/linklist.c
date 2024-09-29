@@ -6,7 +6,8 @@
 int main(int argc, char const *argv[])
 {
     LinkedList* list = linkedlist();
-    add_first(list, 10);
+    add_last(list, 10);
+    print_list(list);
     add_first(list, 4);
     add_first(list, 567);
     add_last(list, 1345);
@@ -67,8 +68,12 @@ void add_last(LinkedList *list, int value) {
 
     Node* tailNode = list->tail;
 
-    tailNode->nextNode = newNode;
-    newNode->prevNode = tailNode;
+    if (tailNode == NULL) {
+        list->head = newNode;
+    } else {
+        tailNode->nextNode = newNode;
+        newNode->prevNode = tailNode;
+    }
 
     list->tail = newNode;
 }
